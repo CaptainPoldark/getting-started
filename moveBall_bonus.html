@@ -1,8 +1,8 @@
 <div id="court" style="
 z-index:6;
 position:absolute;
-width:450px;
-height:450px;
+width:850px;
+height:480px;
 left:200;
 top:200;
 border:3px 
@@ -24,8 +24,8 @@ solid #000;
 <script>
 
 
-var velocityX = 5;
-var velocityY = 3;
+var velocityX = 4;
+var velocityY = 6;
 var positionX = 200;
 var positionY = 200;
 var ball = document.getElementById('ball');
@@ -36,12 +36,13 @@ var court = document.getElementById('court');
 // YOUR CODE 
 function moveBall() {
 var minX = 200;
-var maxX = 600;
+var maxX = 1010;
 
 var minY = 200;
-var maxY = 600;
+var maxY = 635;
 
 var randomColor = Math.floor(Math.random()*16777215).toString(16);
+var bounceSound = new Audio('ball-bounce.mp3');
 
 //addEventListener("mouseover", function(){ball.style.background = "#" + randomColor;});
 
@@ -51,31 +52,45 @@ court.innerHTML = 'PositionX: ' + positionX + ' --- ' + 'PositionY: ' + position
     //positionY = positionY - velocityY;
     ball.style.left = positionX + 'px';
     ball.style.top = positionY + 'px';
+    ball.style.width = "50";
+    ball.style.height = "50";
   }
   else {
     positionX = positionX + velocityX;
     ball.style.left = positionX + 'px';
     ball.style.top = positionY + 'px';
+    ball.style.width = "50";
+    ball.style.height = "50";
   }
   if (hitMaxY) {
   //positionX = positionX + velocityX;
   positionY = positionY - velocityY;
   ball.style.left = positionX + 'px';
   ball.style.top = positionY + 'px';
+  ball.style.width = "50";
+  ball.style.height = "50";
   }
   else {
     positionY = positionY + velocityY;
     ball.style.left = positionX + 'px';
     ball.style.top = positionY + 'px';
+    ball.style.width = "50";
+    ball.style.height = "50";
   }
   
-if (positionX > maxX || positionX === minX){
+if (positionX >= (maxX -2) || positionX === minX){
   hitMaxX = !hitMaxX;
   ball.style.background = "#" + randomColor;
+  ball.style.height = "55";
+  ball.style.width = "30";
+  bounceSound.play();
   }
-if (positionY > maxY || positionY === minY){
+if (positionY >= (maxY-2) || positionY === minY){
   hitMaxY = !hitMaxY;
   ball.style.background = "#" + randomColor;
+  ball.style.width = "55";
+  ball.style.height = "30";
+  bounceSound.play();
 }
 }
 
