@@ -14,7 +14,7 @@
         focus = (focus + 1) % 2;
         direction = checkPageBounds(direction, imgWidth);
         img.src = pacArray[direction][focus];
-        if (direction) {
+        if (direction == 1) {
             pos -= 20;
             img.style.left = pos + "px";
         } else {
@@ -22,12 +22,19 @@
             img.style.left = pos + 'px';
         }
         // Use setTimeout to call Run every 200 millesecs
+        setTimeout(Run,200);
     }
 
     function checkPageBounds(direction, imgWidth) {
         //
         // Complete this to reverse direction on hitting page bounds
         // 
+        if(pos >= (1600 - imgWidth)){
+            direction = 1;
+        }
+        if(pos <= 0){
+            direction = 0;
+        }
         return direction;
     }
 </SCRIPT>
